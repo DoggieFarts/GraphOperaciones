@@ -3,6 +3,8 @@ from tkinter import LEFT
 from tkinter import *
 from tkinter import messagebox
 import numpy as np
+from tokenize import tokenize, untokenize
+from io import BytesIO
 
 top = tkinter.Tk()
 top.geometry('500x500')
@@ -17,7 +19,22 @@ def calcular():
     valorRes1 = restriccion1.get()
     valorRes2 = restriccion2.get()
     valorRes3 = restriccion3.get()
-    print(valorRes1)
+
+#Token de la restriccion 1:
+    tokenRes1 = tokenize(BytesIO(valorRes1.encode('utf-8')).readline)
+    non_empty = [t for t in tokenRes1 if t.line != '']
+    for tokenRes1 in non_empty:
+        print(tokenRes1.string)
+#Token de la restriccion 2
+    tokenRes2 = tokenize(BytesIO(valorRes2.encode('utf-8')).readline)
+    non_empty = [t for t in tokenRes2 if t.line != '']
+    for tokenRes2 in non_empty:
+       print(tokenRes2.string)
+#Token de la restriccion 3
+    tokenRes3 = tokenize(BytesIO(valorRes3.encode('utf-8')).readline)
+    non_empty = [t for t in tokenRes3 if t.line != '']
+    for tokenRes3 in non_empty:
+       print(tokenRes3.string)
 
 
 
