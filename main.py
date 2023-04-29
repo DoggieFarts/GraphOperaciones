@@ -9,6 +9,7 @@ from io import BytesIO
 top = tkinter.Tk()
 top.geometry('500x500')
 
+
 def validacionNum(char):
         return char.isdigit()
 validation = top.register(validacionNum)
@@ -16,6 +17,9 @@ validation = top.register(validacionNum)
 
 
 def calcular():
+    datosRes1 = []
+    datosRes2 = []
+    datosRes3 = []
     valorRes1 = restriccion1.get()
     valorRes2 = restriccion2.get()
     valorRes3 = restriccion3.get()
@@ -24,17 +28,23 @@ def calcular():
     tokenRes1 = tokenize(BytesIO(valorRes1.encode('utf-8')).readline)
     non_empty = [t for t in tokenRes1 if t.line != '']
     for tokenRes1 in non_empty:
-        print(tokenRes1.string)
+        datosRes1.append(tokenRes1.string)
+    datosRes1 = np.array(datosRes1)
+    print(datosRes1)
 #Token de la restriccion 2
     tokenRes2 = tokenize(BytesIO(valorRes2.encode('utf-8')).readline)
     non_empty = [t for t in tokenRes2 if t.line != '']
     for tokenRes2 in non_empty:
-       print(tokenRes2.string)
+       datosRes2.append(tokenRes2.string)
+    datosRes2 = np.array(datosRes2)
+    print(datosRes2)
 #Token de la restriccion 3
     tokenRes3 = tokenize(BytesIO(valorRes3.encode('utf-8')).readline)
     non_empty = [t for t in tokenRes3 if t.line != '']
     for tokenRes3 in non_empty:
-       print(tokenRes3.string)
+       datosRes3.append(tokenRes3.string)
+    datosRes3 = np.array(datosRes3)
+    print(datosRes3)
 
 
 
