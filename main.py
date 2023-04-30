@@ -28,10 +28,6 @@ def graficar():
     linea2 = plt.plot(punto2Res2, punto1Res2)
     linea3 = plt.plot(punto2Res3, punto1Res3)
 
-    inter = linea1.intersection(linea2)
-
-    plt.plot(*inter.xy, 'ro')
-
     plt.grid()
     plt.show()
 def calcular():
@@ -142,6 +138,23 @@ def calcular():
         bandera1x = True
         bandera2x = True
         bandera3x = True
+
+    if bandera1y == True & bandera2x == True:
+        # si no pongo todos esos values no vale los valores la perra linea 152 XD
+        value1 = int(datosRes1[0])
+        value2 = int(datosRes1[3])
+        value3 = int(datosRes2[0])
+        value4 = int(datosRes2[3])
+        value5 = int(datosRes1[6])
+        value6 = int(datosRes2[6])
+        A = np.array([[value1, value2], [value3,value4]])
+        B = np.array([value5, value6])
+        X = np.linalg.inv(A).dot(B)
+        print(X)
+        C = np.array([[3, 1], [3, 2]])
+        D = np.array([15, 24])
+        Z = np.linalg.inv(A).dot(B)
+        #print(X)
 
 
 labelFunObj = tkinter.Label(top, text="Función objetivo")
