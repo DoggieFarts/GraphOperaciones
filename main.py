@@ -35,6 +35,9 @@ def graficar():
     plt.grid()
     plt.show()
 def calcular():
+    global datosRes1
+    global datosRes2
+    global datosRes3
     datosRes1 = []
     datosRes2 = []
     datosRes3 = []
