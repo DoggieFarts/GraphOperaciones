@@ -24,9 +24,16 @@ def my_reset():
             widget.delete(0, 'end')
         if isinstance(widget, tkinter.Radiobutton):
             seleccion.set(1)
-        #if isinstance(widget, tkinter.Label):
-            #widget.config(text=f"")
-
+        if isinstance(widget, tkinter.Label):
+            widget.config(text=f"")
+    labelFunObj = tkinter.Label(top, text="Función objetivo")
+    labelFunObj.grid(row=0, column=0)
+    labelNumRes = tkinter.Label(top, text="Restricción numero 1: ")
+    labelNumRes.grid(row=1, column=0)
+    labelNumRes = tkinter.Label(top, text="Restricción numero 2: ")
+    labelNumRes.grid(row=2, column=0)
+    labelNumRes = tkinter.Label(top, text="Restricción numero 3: ")
+    labelNumRes.grid(row=3, column=0)
 def graficar():
     plt.plot(punto2Res1, punto1Res1)
     plt.plot(punto2Res2, punto1Res2)
@@ -227,9 +234,10 @@ def calcular():
     #Calcular que restricción tenemos que evitar, siempre se evita la más pequeña
     #first = second = math.inf
     if seleccion.get() == 1: # máximizar
-        first = second = resultadoFinal[0]
-        for i in range(len(resultadoFinal), 0):
+        first = second = 0
+        for i in range(0, len(resultadoFinal)):
             if resultadoFinal[i] > first:
+                second = first
                 first = resultadoFinal[i]
                 #first = resultadoFinal[i]
                 #combinacionFinal = i
