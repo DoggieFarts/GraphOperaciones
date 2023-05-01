@@ -1,15 +1,14 @@
 import tkinter
-from tkinter import LEFT
-from tkinter import *
-from tkinter import messagebox
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-from tokenize import tokenize, untokenize
+from tokenize import tokenize
 from io import BytesIO
+from tkinter import *
+
 
 top = tkinter.Tk()
-top.geometry('500x500')
+top.geometry('800x600')
 
 def validacionNum(char):
         return char.isdigit()
@@ -26,7 +25,7 @@ def my_reset():
             seleccion.set(1)
         if isinstance(widget, tkinter.Label):
             widget.config(text=f"")
-    labelFunObj = tkinter.Label(top, text="Función objetivo")
+    labelFunObj = tkinter.Label(top, text="Función objetivo", font=("Arial",16))
     labelFunObj.grid(row=0, column=0)
     labelNumRes = tkinter.Label(top, text="Restricción numero 1: ")
     labelNumRes.grid(row=1, column=0)
@@ -286,22 +285,22 @@ def calcular():
     resEtiqueta.grid(row=9, column=1)
     print()
 
-labelFunObj = tkinter.Label(top, text="Función objetivo")
+labelFunObj = tkinter.Label(top, text="Función objetivo", font=("Arial",16))
 labelFunObj.grid(row=0, column=0)
 entryFunObj = tkinter.Entry(top)
 entryFunObj.grid(row=0, column=1)
 #Restriccion 1
-labelNumRes=tkinter.Label(top,text="Restricción numero 1: ")
+labelNumRes=tkinter.Label(top,text="Restricción numero 1: ", font=("Arial",16))
 labelNumRes.grid(row=1,column=0)
 restriccion1 = tkinter.Entry(top)
 restriccion1.grid(row=1, column=1)
 #Restriccion 2
-labelNumRes=tkinter.Label(top,text="Restricción numero 2: ")
+labelNumRes=tkinter.Label(top,text="Restricción numero 2: ", font=("Arial",16))
 labelNumRes.grid(row=2,column=0)
 restriccion2 = tkinter.Entry(top)
 restriccion2.grid(row=2, column=1)
 #Restriccion 3
-labelNumRes=tkinter.Label(top,text="Restricción numero 3: ")
+labelNumRes=tkinter.Label(top,text="Restricción numero 3: ", font=("Arial",16))
 labelNumRes.grid(row=3,column=0)
 restriccion3 = tkinter.Entry(top)
 restriccion3.grid(row=3, column=1)
@@ -322,6 +321,9 @@ graficarButton.grid(row=5, column=1)
 
 resetButton = tkinter.Button(top, text="Reset", command=lambda: my_reset())
 resetButton.grid(row=5, column=2)
+
+instrucciones = tkinter.Label(top, text="Instrucciones de uso del programa\n 1.- Escribir función objetivo y restricciones de la manera \"Wx1+Wx2\"\n 2.- Seleccionar a minimizar o a maximizar \n 3.- Dar click en cálcular \n 4.- Dar click en gráficar \n 5.- En caso de querer ingresar otro problema dar click en reset", font=("Arial",16), justify= LEFT)
+instrucciones.grid(row=7,column=1)
 
 top.mainloop()
 
