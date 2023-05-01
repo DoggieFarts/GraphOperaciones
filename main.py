@@ -11,18 +11,21 @@ from io import BytesIO
 top = tkinter.Tk()
 top.geometry('500x500')
 
-punto1Res1 = []
-punto2Res1 = []
-punto1Res2 = []
-punto2Res2 = []
-punto1Res3 = []
-punto2Res3 = []
-xs = []
-ys = []
-
 def validacionNum(char):
         return char.isdigit()
 validation = top.register(validacionNum)
+
+#stringResCombinacion = ""
+#stringResultado = ""
+#combinacionFinal = 0
+def my_reset():
+    for widget in top.winfo_children():
+        if isinstance(widget, tkinter.Entry):
+            widget.delete(0, 'end')
+        if isinstance(widget, tkinter.Radiobutton):
+            seleccion.set(1)
+        #if isinstance(widget, tkinter.Label):
+            #widget.config(text=f"")
 
 def graficar():
     plt.plot(punto2Res1, punto1Res1)
@@ -35,7 +38,7 @@ def graficar():
     plt.plot(extremoX, 0, marker="o")
     #print(np.max(ys))
     #print(np.max(xs))
-    plt.figure()
+    #plt.figure()
     plt.grid()
     plt.show()
 def calcular():
@@ -44,7 +47,7 @@ def calcular():
     global datosRes2
     global datosRes3
     global resultadoFinal
-    global combinacionFinal
+    combinacionFinal = 0
     datosFuncObj = []
     datosRes1 = []
     datosRes2 = []
@@ -65,7 +68,28 @@ def calcular():
     global x1FuncObj
     global x2FuncObj
     global seleccion
-
+    global punto1Res1
+    global punto2Res1
+    global punto1Res2
+    global punto2Res2
+    global punto1Res3
+    global punto2Res3
+    global xs
+    global ys
+    global stringResCombinacion
+    global stringResultado
+    global numResFinal
+    punto1Res1 = []
+    punto2Res1 = []
+    punto1Res2 = []
+    punto2Res2 = []
+    punto1Res3 = []
+    punto2Res3 = []
+    xs = []
+    ys = []
+    stringResCombinacion = ""
+    stringResultado = ""
+    numResFinal = 0
 #Token para la func objetivo
     tokenFuncObj = tokenize(BytesIO(valorFuncObj.encode('utf-8')).readline)
     non_empty = [t for t in tokenFuncObj if t.line != '']
@@ -202,7 +226,7 @@ def calcular():
     resultadoFinal.append(tempRes)
     #Calcular que restricción tenemos que evitar, siempre se evita la más pequeña
     #first = second = math.inf
-    if seleccion.get() == 1:
+    if seleccion.get() == 1: # máximizar
         first = second = resultadoFinal[0]
         for i in range(len(resultadoFinal), 0):
             if resultadoFinal[i] > first:
@@ -213,7 +237,8 @@ def calcular():
                 second = resultadoFinal[i]
                 combinacionFinal = i
         print(second)
-    elif seleccion.get() == 2:
+        numResFinal = second
+    elif seleccion.get() == 2: # minimizar
         first = second = math.inf
         for i in range(0, len(resultadoFinal)):
             if resultadoFinal[i] < first:
@@ -223,22 +248,35 @@ def calcular():
                 second = resultadoFinal[i]
                 combinacionFinal = i
         print(second)
+        numResFinal = second
     #imprimimos el resultado
     if combinacionFinal == 0:
-        print("La mejor combinación es con x1 = "+str(punto1Inters1)+" y con x2 = "+str(punto2Inters1))
+        stringResCombinacion = "La mejor combinación es con x1 = "+str(punto1Inters1)+" y con x2 = "+str(punto2Inters1)
+        stringResultado = "Dando como resultado: "+str(numResFinal)+" unidades."
+        #print("La mejor combinación es con x1 = "+str(punto1Inters1)+" y con x2 = "+str(punto2Inters1))
     elif combinacionFinal == 1:
-        print("La mejor combinación es con x1 = "+str(punto1Inters2)+" y con x2 = "+str(punto2Inters2))
+        stringResCombinacion = "La mejor combinación es con x1 = "+str(punto1Inters2)+" y con x2 = "+str(punto2Inters2)
+        stringResultado = "Dando como resultado: " + str(numResFinal) + " unidades."
+        #print("La mejor combinación es con x1 = "+str(punto1Inters2)+" y con x2 = "+str(punto2Inters2))
     elif combinacionFinal == 2:
-        print("La mejor combinación es con x1 = "+str(punto1Inters3)+" y con x2 = "+str(punto2Inters3))
+        stringResCombinacion = "La mejor combinación es con x1 = "+str(punto1Inters3)+" y con x2 = "+str(punto2Inters3)
+        stringResultado = "Dando como resultado: " + str(numResFinal) + " unidades."
+        #print("La mejor combinación es con x1 = "+str(punto1Inters3)+" y con x2 = "+str(punto2Inters3))
     elif combinacionFinal == 3:
-        print("La mejor combinación es con x1 = 0 y con x2 = "+str(extremoY))
+        stringResCombinacion = "La mejor combinación es con x1 = 0 y con x2 = "+str(extremoY)
+        stringResultado = "Dando como resultado: " + str(numResFinal) + " unidades."
+        #print("La mejor combinación es con x1 = 0 y con x2 = "+str(extremoY))
     elif combinacionFinal == 4:
-        print("La mejor combinación es con x1 = "+str(extremoX)+" y con x2 = 0")
+        stringResCombinacion = "La mejor combinación es con x1 = "+str(extremoX)+" y con x2 = 0"
+        stringResultado = "Dando como resultado: " + str(numResFinal) + " unidades."
+        #print("La mejor combinación es con x1 = "+str(extremoX)+" y con x2 = 0")
     #print(np.min(resultadoFinal))
     #función para obtener el segundo más chico de los resultados
-
+    resCombEtiqueta = tkinter.Label(top, text=stringResCombinacion)
+    resCombEtiqueta.grid(row=8, column=1)
+    resEtiqueta = tkinter.Label(top, text=stringResultado)
+    resEtiqueta.grid(row=9, column=1)
     print()
-
 
 labelFunObj = tkinter.Label(top, text="Función objetivo")
 labelFunObj.grid(row=0, column=0)
@@ -262,16 +300,23 @@ restriccion3.grid(row=3, column=1)
 
 seleccion = tkinter.IntVar()
 seleccion.set(1)
-rBtnMax = tkinter.Radiobutton(text="Máximizar", variable=seleccion, value=1)
+rBtnMax = tkinter.Radiobutton(top, text="Máximizar", variable=seleccion, value=1)
 rBtnMax.grid(row=4, column=0)
 
-rBtnMin = tkinter.Radiobutton(text="Minimizar", variable=seleccion, value=2)
+rBtnMin = tkinter.Radiobutton(top, text="Minimizar", variable=seleccion, value=2)
 rBtnMin.grid(row=4, column=1)
 
-calcularButton = tkinter.Button(text="Calcular", command=calcular)
+calcularButton = tkinter.Button(top, text="Calcular", command=calcular)
 calcularButton.grid(row=5,column=0)
 
-graficarButton = tkinter.Button(text="Graficar", command=graficar)
+graficarButton = tkinter.Button(top, text="Graficar", command=graficar)
 graficarButton.grid(row=5, column=1)
 
+resetButton = tkinter.Button(top, text="Reset", command=lambda: my_reset())
+resetButton.grid(row=5, column=2)
+
 top.mainloop()
+
+
+
+
