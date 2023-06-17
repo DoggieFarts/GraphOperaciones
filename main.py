@@ -58,6 +58,9 @@ def calcular():
     datosRes2 = []
     datosRes3 = []
     resultadoFinal = []
+    ArregloOrdenado1 = []
+    ArregloOrdenado2 = []
+    ArregloOrdenado3 = []
     valorFuncObj = entryFunObj.get()
     valorRes1 = restriccion1.get()
     valorRes2 = restriccion2.get()
@@ -101,10 +104,9 @@ def calcular():
     for tokenFuncObj in non_empty:
         datosFuncObj.append(tokenFuncObj.string)
     datosFuncObj = np.array(datosFuncObj)
-    x1FuncObj = int(datosFuncObj[2])#valor de x1
-    x2FuncObj = int(datosFuncObj[5])#valor de x2
-    x3FuncObj = int(datosFuncObj[8])#valor de x3
-
+    x1FuncObj = int(datosFuncObj[2])#valor de x1, aquí se guarda el 36
+    x2FuncObj = int(datosFuncObj[5])#valor de x2, aquí se guarda el 40
+    x3FuncObj = int(datosFuncObj[8])#valor de x3, aquí se guarda el 28
 
 #Token de la restriccion 1:
     tokenRes1 = tokenize(BytesIO(valorRes1.encode('utf-8')).readline)
@@ -112,21 +114,7 @@ def calcular():
     for tokenRes1 in non_empty:
         datosRes1.append(tokenRes1.string)
     datosRes1 = np.array(datosRes1)
-    temp = float(datosRes1[6])
-    temp2 = float(datosRes1[3])
-    temp3 = temp/temp2
-    punto1Res1.append(0)
-    punto1Res1.append(temp3) #print(punto1Res1[0]) #print(punto1Res1[1])
-    #punto1Res1 = np.array(punto2Res1)
-    ys.append(temp3)
-    #print(ys[0])
-    temp = float(datosRes1[6])
-    temp2 = float(datosRes1[0])
-    temp3 = temp / temp2
-    punto2Res1.append(temp3)
-    xs.append(temp3)
-    #print(xs[0])
-    punto2Res1.append(0) #print(punto2Res1[0]) #print(punto2Res1[1])
+    # aquí ya tenemos
 
 #Token de la restriccion 2
     tokenRes2 = tokenize(BytesIO(valorRes2.encode('utf-8')).readline)
@@ -134,53 +122,109 @@ def calcular():
     for tokenRes2 in non_empty:
        datosRes2.append(tokenRes2.string)
     datosRes2 = np.array(datosRes2)#print(datosRes2)
-    temp = float(datosRes2[6])
-    temp2 = float(datosRes2[3])
-    temp3 = temp / temp2
-    punto1Res2.append(0)
-    punto1Res2.append(temp3) #print(punto1Res2[0]) print(punto1Res2[1])
-    ys.append(temp3)
-    #print(ys[1])
-    temp = float(datosRes2[6])
-    temp2 = float(datosRes2[0])
-    temp3 = temp / temp2
-    punto2Res2.append(temp3)
-    xs.append(temp3)
-    #print(xs[1])
-    punto2Res2.append(0)#print(punto2Res2[0])#print(punto2Res2[1])
 
+#datosRes1 y datosRes2
+    ArregloOrdenado1.append(datosRes1[0]) # aquí se guarda el 6 pos0
+    ArregloOrdenado1.append(datosRes2[0]) # aquí se guarda el 2 pos1
+    ArregloOrdenado1.append(x1FuncObj)    # aquí se guarda el 36 pos2
+
+    temp = float(ArregloOrdenado1[2])
+    temp2 = float(ArregloOrdenado1[1])
+    temp3 = temp/temp2
+
+    punto1Res1.append(0)
+    punto1Res1.append(temp3)
+    # aquì guardas ys.append(temp3)
+    ys.append(temp3)
+
+    temp = float(ArregloOrdenado1[2])
+    temp2 = float(ArregloOrdenado1[0])
+    temp3 = temp/temp2
+
+    punto2Res1.append(temp3)
+    punto2Res1.append(0)
+    xs.append(temp3)
+
+    #hacemos división entre 36 y 2,y guardamos  punto1Res1.append(0) y  punto1Res1.append(resultado de la div) y guardamos el res en ys.append(temp3)
+    #hacemos división entre 36 y 6,y punto2Res1.append(resultado de la div) guardamos  punto2Res1.append(0) y guardar el res de la div en xs.append(res de la div)
+
+    ArregloOrdenado2.append(datosRes1[3]) # aquí se guarda el 5 res1
+    ArregloOrdenado2.append(datosRes2[3]) # aquí se guarda el 5 res2
+    ArregloOrdenado2.append(x2FuncObj)    # aquí se guarda el 40
+
+    temp = float(ArregloOrdenado2[2])
+    temp2 = float(ArregloOrdenado2[1])
+    temp3 = temp/temp2
+
+    punto1Res2.append(0)
+    punto1Res2.append(temp3)
+    ys.append(temp3)
+
+    temp = float(ArregloOrdenado2[2])
+    temp2 = float(ArregloOrdenado2[0])
+    temp3 = temp/temp2
+
+    punto2Res2.append(temp3)
+    punto2Res2.append(0)
+    xs.append(temp3)
+
+
+    # hacemos la división entre 40 y 5 res 1, y guardamos punto1Res2.append(0) y punto1Res2.append(resultado de la div) y guardar el resultado en en ys.append(resultado de la div)
+    # hacemos división entre 40 y 5 res 2, y guardamos  punto2Res2.append(temp3) y guardamos punto2Res2.append(0) y guardas xs.append(temp3)
+
+    ArregloOrdenado3.append(datosRes1[6]) # aquí se guarda el 2 pos0
+    ArregloOrdenado3.append(datosRes2[6]) # aquí se guarda el 4 pos1
+    ArregloOrdenado3.append(x3FuncObj)    # aquí se guarda el 28 pos2
+
+    temp = float(ArregloOrdenado3[2])
+    temp2 = float(ArregloOrdenado3[1])
+    temp3 = temp/temp2
+
+    punto1Res3.append(0)
+    punto1Res3.append(temp3)
+    ys.append(temp3)
+
+    temp = float(ArregloOrdenado3[2])
+    temp2 = float(ArregloOrdenado3[0])
+    temp3 = temp/temp2
+
+    punto2Res3.append(temp3)
+    punto2Res3.append(0)
+    xs.append(temp3)
+    #hacemos la división entre 28 y 4 y guardamos punto1Res3.append(0) y punto1Res3.append(temp3) y ys.append(temp3)
+    #hacemos la división entre 28 y 2 y guardamos punto2Res3.append(temp3) y punto2Res3.append(0) y xs.append(temp3)
 
     # intersección linea uno con línea dos
-    value1 = float(datosRes1[0])
-    value2 = float(datosRes1[3])
-    value3 = float(datosRes2[0])
-    value4 = float(datosRes2[3])
-    value5 = float(datosRes1[6])
-    value6 = float(datosRes2[6])
+    value1 = float(ArregloOrdenado1[0])
+    value2 = float(ArregloOrdenado1[1])
+    value3 = float(ArregloOrdenado2[0])
+    value4 = float(ArregloOrdenado2[1])
+    value5 = float(ArregloOrdenado1[2])
+    value6 = float(ArregloOrdenado2[2])
     A = np.array([[value1, value2], [value3,value4]])
     B = np.array([value5, value6])
     X = np.linalg.inv(A).dot(B)
     punto1Inters1 = X[0]
     punto2Inters1 = X[1]
     # intersección linea uno con línea tres
-    value1 = float(datosRes1[0])
-    value2 = float(datosRes1[3])
-    value3 = float(datosRes3[0])
-    value4 = float(datosRes3[3])
-    value5 = float(datosRes1[6])
-    value6 = float(datosRes3[6])
+    value1 = float(ArregloOrdenado1[0])
+    value2 = float(ArregloOrdenado1[1])
+    value3 = float(ArregloOrdenado3[0])
+    value4 = float(ArregloOrdenado3[1])
+    value5 = float(ArregloOrdenado1[2])
+    value6 = float(ArregloOrdenado3[2])
     A = np.array([[value1, value2], [value3, value4]])
     B = np.array([value5, value6])
     X = np.linalg.inv(A).dot(B)
     punto1Inters2 = X[0]
     punto2Inters2 = X[1]
     # intersección linea dos con línea tres
-    value1 = float(datosRes2[0])
-    value2 = float(datosRes2[3])
-    value3 = float(datosRes3[0])
-    value4 = float(datosRes3[3])
-    value5 = float(datosRes2[6])
-    value6 = float(datosRes3[6])
+    value1 = float(ArregloOrdenado2[0])
+    value2 = float(ArregloOrdenado2[1])
+    value3 = float(ArregloOrdenado3[0])
+    value4 = float(ArregloOrdenado3[1])
+    value5 = float(ArregloOrdenado2[2])
+    value6 = float(ArregloOrdenado3[2])
     A = np.array([[value1, value2], [value3, value4]])
     B = np.array([value5, value6])
     X = np.linalg.inv(A).dot(B)
