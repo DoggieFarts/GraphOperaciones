@@ -31,8 +31,7 @@ def my_reset():
     labelNumRes.grid(row=1, column=0)
     labelNumRes = tkinter.Label(top, text="Restricción numero 2: ")
     labelNumRes.grid(row=2, column=0)
-    labelNumRes = tkinter.Label(top, text="Restricción numero 3: ")
-    labelNumRes.grid(row=3, column=0)
+
 def graficar():
     plt.plot(punto2Res1, punto1Res1)
     plt.plot(punto2Res2, punto1Res2)
@@ -104,8 +103,9 @@ def calcular():
     datosFuncObj = np.array(datosFuncObj)
     x1FuncObj = int(datosFuncObj[2])#valor de x1
     x2FuncObj = int(datosFuncObj[5])#valor de x2
-    print(datosFuncObj[2]) #valor de x1
-    print(datosFuncObj[5]) #valor de x2
+    x3FuncObj = int(datosFuncObj[8])#valor de x3
+
+
 #Token de la restriccion 1:
     tokenRes1 = tokenize(BytesIO(valorRes1.encode('utf-8')).readline)
     non_empty = [t for t in tokenRes1 if t.line != '']
@@ -149,29 +149,6 @@ def calcular():
     #print(xs[1])
     punto2Res2.append(0)#print(punto2Res2[0])#print(punto2Res2[1])
 
-#Token de la restriccion 3
-    tokenRes3 = tokenize(BytesIO(valorRes3.encode('utf-8')).readline)
-    non_empty = [t for t in tokenRes3 if t.line != '']
-    for tokenRes3 in non_empty:
-       datosRes3.append(tokenRes3.string)
-    datosRes3 = np.array(datosRes3) #print(datosRes3)
-    temp = float(datosRes3[6])
-    temp2 = float(datosRes3[3])
-    temp3 = temp / temp2
-    punto1Res3.append(0)
-    punto1Res3.append(temp3)#print(punto1Res3[1])print(punto1Res3[0])
-    ys.append(temp3)
-    #print(ys[2])
-    temp = float(datosRes3[6])
-    temp2 = float(datosRes3[0])
-    temp3 = temp / temp2
-    punto2Res3.append(temp3)
-    xs.append(temp3)
-    #print(xs[2])
-    punto2Res3.append(0)#print(punto2Res3[0])#print(punto2Res3[1])
-    #print("---")
-    #print(np.max(ys))
-    #print(np.max(xs))
 
     # intersección linea uno con línea dos
     value1 = float(datosRes1[0])
