@@ -61,10 +61,11 @@ def calcular():
     ArregloOrdenado1 = []
     ArregloOrdenado2 = []
     ArregloOrdenado3 = []
+    ArregloOrdenado4 = []
     valorFuncObj = entryFunObj.get()
     valorRes1 = restriccion1.get()
     valorRes2 = restriccion2.get()
-    valorRes3 = restriccion3.get()
+    #valorRes3 = restriccion3.get()
     global punto1Inters1
     global punto2Inters1
     global punto1Inters2
@@ -136,6 +137,9 @@ def calcular():
     punto1Res1.append(temp3)
     # aquì guardas ys.append(temp3)
     ys.append(temp3)
+    print("------------------")
+    print("0")
+    print(temp3)
 
     temp = float(ArregloOrdenado1[2])
     temp2 = float(ArregloOrdenado1[0])
@@ -144,6 +148,10 @@ def calcular():
     punto2Res1.append(temp3)
     punto2Res1.append(0)
     xs.append(temp3)
+
+    print(temp3)
+    print("0")
+    print("------------------")
 
     #hacemos división entre 36 y 2,y guardamos  punto1Res1.append(0) y  punto1Res1.append(resultado de la div) y guardamos el res en ys.append(temp3)
     #hacemos división entre 36 y 6,y punto2Res1.append(resultado de la div) guardamos  punto2Res1.append(0) y guardar el res de la div en xs.append(res de la div)
@@ -160,6 +168,10 @@ def calcular():
     punto1Res2.append(temp3)
     ys.append(temp3)
 
+    print("------------------")
+    print("0")
+    print(temp3)
+
     temp = float(ArregloOrdenado2[2])
     temp2 = float(ArregloOrdenado2[0])
     temp3 = temp/temp2
@@ -168,6 +180,9 @@ def calcular():
     punto2Res2.append(0)
     xs.append(temp3)
 
+    print(temp3)
+    print("0")
+    print("------------------")
 
     # hacemos la división entre 40 y 5 res 1, y guardamos punto1Res2.append(0) y punto1Res2.append(resultado de la div) y guardar el resultado en en ys.append(resultado de la div)
     # hacemos división entre 40 y 5 res 2, y guardamos  punto2Res2.append(temp3) y guardamos punto2Res2.append(0) y guardas xs.append(temp3)
@@ -184,6 +199,10 @@ def calcular():
     punto1Res3.append(temp3)
     ys.append(temp3)
 
+    print("------------------")
+    print("0")
+    print(temp3)
+
     temp = float(ArregloOrdenado3[2])
     temp2 = float(ArregloOrdenado3[0])
     temp3 = temp/temp2
@@ -191,9 +210,21 @@ def calcular():
     punto2Res3.append(temp3)
     punto2Res3.append(0)
     xs.append(temp3)
+
+    print(temp3)
+    print("0")
+    print("------------------")
+
+    #ahora guardamos los datos de la restricción
+    ArregloOrdenado4.append(datosRes1[9])  # aquí se guarda el 5 para la func obj
+    ArregloOrdenado4.append(datosRes2[9])  # aquí se guarda el 3 para la func obj
+    print(ArregloOrdenado4[0])
+    print(ArregloOrdenado4[1])
+
+    print()
     #hacemos la división entre 28 y 4 y guardamos punto1Res3.append(0) y punto1Res3.append(temp3) y ys.append(temp3)
     #hacemos la división entre 28 y 2 y guardamos punto2Res3.append(temp3) y punto2Res3.append(0) y xs.append(temp3)
-
+    #------------------------------- los valores ordenados se guardan bien
     # intersección linea uno con línea dos
     value1 = float(ArregloOrdenado1[0])
     value2 = float(ArregloOrdenado1[1])
@@ -201,6 +232,7 @@ def calcular():
     value4 = float(ArregloOrdenado2[1])
     value5 = float(ArregloOrdenado1[2])
     value6 = float(ArregloOrdenado2[2])
+    print()
     A = np.array([[value1, value2], [value3,value4]])
     B = np.array([value5, value6])
     X = np.linalg.inv(A).dot(B)
@@ -240,20 +272,21 @@ def calcular():
         extremoX = np.max(xs)
 
     # Ahora calculamos el resultado para minimizar
-    tempRes = (punto1Inters1 * x1FuncObj) + (punto2Inters1 * x2FuncObj)
+    tempRes = (punto1Inters1 * float(ArregloOrdenado4[0])) + (punto2Inters1 * float(ArregloOrdenado4[1]))
     resultadoFinal.append(tempRes)
-    tempRes = (punto1Inters2 * x1FuncObj) + (punto2Inters2 * x2FuncObj)
+    tempRes = (punto1Inters2 * float(ArregloOrdenado4[0])) + (punto2Inters2 * float(ArregloOrdenado4[1]))
     resultadoFinal.append(tempRes)
-    tempRes = (punto1Inters3 * x1FuncObj) + (punto2Inters3 * x2FuncObj)
+    tempRes = (punto1Inters3 * float(ArregloOrdenado4[0])) + (punto2Inters3 * float(ArregloOrdenado4[1]))
     resultadoFinal.append(tempRes)
     # extremos
-    tempRes = (0 * x1FuncObj) + (extremoY * x2FuncObj)
+    tempRes = (0 * float(ArregloOrdenado4[0])) + (extremoY * float(ArregloOrdenado4[1]))
     resultadoFinal.append(tempRes)
-    tempRes = (extremoX * x1FuncObj) + (0 * x2FuncObj)
+    tempRes = (extremoX * float(ArregloOrdenado4[0])) + (0 * float(ArregloOrdenado4[1]))
     resultadoFinal.append(tempRes)
+    print()
     #Calcular que restricción tenemos que evitar, siempre se evita la más pequeña
     #first = second = math.inf
-    if seleccion.get() == 1: # máximizar
+    if seleccion.get() == 1: # 1-máximizar, pero ahora lo inventirmos
         first = second = 0
         for i in range(0, len(resultadoFinal)):
             if resultadoFinal[i] > first:
@@ -266,7 +299,7 @@ def calcular():
                 combinacionFinal = i
         print(second)
         numResFinal = second
-    elif seleccion.get() == 2: # minimizar
+    elif seleccion.get() == 2: # 2-minimizar, pero ahora lo inventirmos
         first = second = math.inf
         for i in range(0, len(resultadoFinal)):
             if resultadoFinal[i] < first:
@@ -321,17 +354,17 @@ labelNumRes.grid(row=2,column=0)
 restriccion2 = tkinter.Entry(top)
 restriccion2.grid(row=2, column=1)
 #Restriccion 3
-labelNumRes=tkinter.Label(top,text="Restricción numero 3: ", font=("Arial",16))
-labelNumRes.grid(row=3,column=0)
-restriccion3 = tkinter.Entry(top)
-restriccion3.grid(row=3, column=1)
+#labelNumRes=tkinter.Label(top,text="Restricción numero 3: ", font=("Arial",16))
+#labelNumRes.grid(row=3,column=0)
+#restriccion3 = tkinter.Entry(top)
+#restriccion3.grid(row=3, column=1)
 
 seleccion = tkinter.IntVar()
 seleccion.set(1)
-rBtnMax = tkinter.Radiobutton(top, text="Máximizar", variable=seleccion, value=1)
+rBtnMax = tkinter.Radiobutton(top, text="Minimizar", variable=seleccion, value=1)
 rBtnMax.grid(row=4, column=0)
 
-rBtnMin = tkinter.Radiobutton(top, text="Minimizar", variable=seleccion, value=2)
+rBtnMin = tkinter.Radiobutton(top, text="Máximizar", variable=seleccion, value=2)
 rBtnMin.grid(row=4, column=1)
 
 calcularButton = tkinter.Button(top, text="Calcular", command=calcular)
