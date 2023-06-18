@@ -25,6 +25,8 @@ def my_reset():
             seleccion.set(1)
         if isinstance(widget, tkinter.Label):
             widget.config(text=f"")
+        if isinstance(widget, tkinter.Label):
+            widget.destroy()
     labelFunObj = tkinter.Label(top, text="Función objetivo", font=("Arial",16))
     labelFunObj.grid(row=0, column=0)
     labelNumRes = tkinter.Label(top, text="Restricción numero 1: ")
@@ -137,9 +139,7 @@ def calcular():
     punto1Res1.append(temp3)
     # aquì guardas ys.append(temp3)
     ys.append(temp3)
-    print("------------------")
-    print("0")
-    print(temp3)
+
 
     temp = float(ArregloOrdenado1[2])
     temp2 = float(ArregloOrdenado1[0])
@@ -149,9 +149,6 @@ def calcular():
     punto2Res1.append(0)
     xs.append(temp3)
 
-    print(temp3)
-    print("0")
-    print("------------------")
 
     #hacemos división entre 36 y 2,y guardamos  punto1Res1.append(0) y  punto1Res1.append(resultado de la div) y guardamos el res en ys.append(temp3)
     #hacemos división entre 36 y 6,y punto2Res1.append(resultado de la div) guardamos  punto2Res1.append(0) y guardar el res de la div en xs.append(res de la div)
@@ -168,9 +165,6 @@ def calcular():
     punto1Res2.append(temp3)
     ys.append(temp3)
 
-    print("------------------")
-    print("0")
-    print(temp3)
 
     temp = float(ArregloOrdenado2[2])
     temp2 = float(ArregloOrdenado2[0])
@@ -180,9 +174,6 @@ def calcular():
     punto2Res2.append(0)
     xs.append(temp3)
 
-    print(temp3)
-    print("0")
-    print("------------------")
 
     # hacemos la división entre 40 y 5 res 1, y guardamos punto1Res2.append(0) y punto1Res2.append(resultado de la div) y guardar el resultado en en ys.append(resultado de la div)
     # hacemos división entre 40 y 5 res 2, y guardamos  punto2Res2.append(temp3) y guardamos punto2Res2.append(0) y guardas xs.append(temp3)
@@ -199,9 +190,6 @@ def calcular():
     punto1Res3.append(temp3)
     ys.append(temp3)
 
-    print("------------------")
-    print("0")
-    print(temp3)
 
     temp = float(ArregloOrdenado3[2])
     temp2 = float(ArregloOrdenado3[0])
@@ -211,17 +199,12 @@ def calcular():
     punto2Res3.append(0)
     xs.append(temp3)
 
-    print(temp3)
-    print("0")
-    print("------------------")
+
 
     #ahora guardamos los datos de la restricción
     ArregloOrdenado4.append(datosRes1[9])  # aquí se guarda el 5 para la func obj
     ArregloOrdenado4.append(datosRes2[9])  # aquí se guarda el 3 para la func obj
-    print(ArregloOrdenado4[0])
-    print(ArregloOrdenado4[1])
 
-    print()
     #hacemos la división entre 28 y 4 y guardamos punto1Res3.append(0) y punto1Res3.append(temp3) y ys.append(temp3)
     #hacemos la división entre 28 y 2 y guardamos punto2Res3.append(temp3) y punto2Res3.append(0) y xs.append(temp3)
     #------------------------------- los valores ordenados se guardan bien
@@ -232,7 +215,7 @@ def calcular():
     value4 = float(ArregloOrdenado2[1])
     value5 = float(ArregloOrdenado1[2])
     value6 = float(ArregloOrdenado2[2])
-    print()
+
     A = np.array([[value1, value2], [value3,value4]])
     B = np.array([value5, value6])
     X = np.linalg.inv(A).dot(B)
@@ -283,7 +266,7 @@ def calcular():
     resultadoFinal.append(tempRes)
     tempRes = (extremoX * float(ArregloOrdenado4[0])) + (0 * float(ArregloOrdenado4[1]))
     resultadoFinal.append(tempRes)
-    print()
+
     #Calcular que restricción tenemos que evitar, siempre se evita la más pequeña
     #first = second = math.inf
     if seleccion.get() == 1: # 1-máximizar, pero ahora lo inventirmos
@@ -297,7 +280,7 @@ def calcular():
             elif (resultadoFinal[i] > second and resultadoFinal[i] != first):
                 second = resultadoFinal[i]
                 combinacionFinal = i
-        print(second)
+
         numResFinal = second
     elif seleccion.get() == 2: # 2-minimizar, pero ahora lo inventirmos
         first = second = math.inf
@@ -308,7 +291,7 @@ def calcular():
             elif (resultadoFinal[i] < second and resultadoFinal[i] != first):
                 second = resultadoFinal[i]
                 combinacionFinal = i
-        print(second)
+
         numResFinal = second
     #imprimimos el resultado
     if combinacionFinal == 0:
@@ -333,11 +316,11 @@ def calcular():
         #print("La mejor combinación es con x1 = "+str(extremoX)+" y con x2 = 0")
     #print(np.min(resultadoFinal))
     #función para obtener el segundo más chico de los resultados
-    resCombEtiqueta = tkinter.Label(top, text=stringResCombinacion)
+    resCombEtiqueta = tkinter.Label(top, text=stringResCombinacion, font=("Arial",15))
     resCombEtiqueta.grid(row=8, column=1)
-    resEtiqueta = tkinter.Label(top, text=stringResultado)
+    resEtiqueta = tkinter.Label(top, text=stringResultado, font=("Arial",15))
     resEtiqueta.grid(row=9, column=1)
-    print()
+
 
 labelFunObj = tkinter.Label(top, text="Función objetivo", font=("Arial",16))
 labelFunObj.grid(row=0, column=0)
@@ -376,7 +359,7 @@ graficarButton.grid(row=5, column=1)
 resetButton = tkinter.Button(top, text="Reset", command=lambda: my_reset())
 resetButton.grid(row=5, column=2)
 
-instrucciones = tkinter.Label(top, text="Instrucciones de uso del programa\n 1.- Escribir función objetivo y restricciones de la manera \"Wx1+Wx2\"\n 2.- Seleccionar a minimizar o a maximizar \n 3.- Dar click en cálcular \n 4.- Dar click en gráficar \n 5.- En caso de querer ingresar otro problema dar click en reset", font=("Arial",16), justify= LEFT)
+instrucciones = tkinter.Label(top, text="Instrucciones de uso del programa\n 1.- Escribir función objetivo y restricciones de la manera \"Wx1+Wx2+Wx3\"\n 2.- Seleccionar a minimizar o a maximizar \n 3.- Dar click en cálcular \n 4.- Dar click en gráficar \n 5.- En caso de querer ingresar otro problema dar click en reset", font=("Arial",12), justify= LEFT)
 instrucciones.grid(row=7,column=1)
 
 top.mainloop()
